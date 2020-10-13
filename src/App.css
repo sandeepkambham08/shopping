@@ -4,7 +4,7 @@
 }
 
 .App-header {
-  background-color: #000000;
+  background-color: #045701;
   height: 10vh;
   display: flex;
   position: fixed;
@@ -26,9 +26,11 @@
   /* background-image: url(./media/backgroundImage.jpg); */
   background-repeat: no-repeat;
   background-size: cover;
-  background-color: #fdfdfd;
+  background-color: #e4e4e4;
   /* background-attachment: fixed; */
-  height: 100vh;
+  height: 100%;
+  min-height: 100vh;
+  padding-bottom: 10%;
 }
 
 

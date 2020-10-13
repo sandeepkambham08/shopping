@@ -4,6 +4,7 @@ import React, {Component} from 'react';
 import menu from './media/menu.png';
 import cart from './media/cart1.jpg';
 import './App.css';
+import StarRatings from 'react-star-ratings';
 
 import Leftdrawer from './Left-drawer/LeftDrawer';
 import Rightdrawer from './Right-drawer/RightDrawer';
@@ -16,7 +17,7 @@ class App extends Component {
   state = {
     leftMenuOpen: false,
     rightMenuOpen:false,
-    selectedCategory:'vegetable',
+    selectedCategory:'fruit',
   }
   
   LeftdrawerOpen = () =>{
@@ -43,7 +44,7 @@ class App extends Component {
       <div className="App">
        <header className="App-header">
             <img src={menu} onClick={()=>this.LeftdrawerOpen()} className='Menu-button' alt="menu-button"/>
-            <p> The <span style={{fontWeight:"bolder", fontStyle:'italic',  textShadow:'3px 3px 7px #ff0f0f'}}>Shopping</span> store you love </p>
+            <p> The <span style={{fontWeight:"bolder", fontStyle:'italic',  textShadow:'3px 3px 7px #0f0f0f'}}>Shopping</span> store you love </p>
             <img src={cart} onClick={()=>this.rightDrawerOpen()} className='Cart-button' alt="menu-button"/>
         </header>
         <div className='App-body'>

@@ -3,23 +3,32 @@ p {
   }
 
 .Single-item{
-    border: 1px solid rgb(105, 105, 105);
+    /* border: 1px solid rgb(173, 173, 173); */
     margin:1vh;
-    min-width: 10vw;
-    max-width: 15vw;
-    min-height: 20vh;
-    max-height: 40vh;
+    min-width: 12vw;
+    /* max-width: 15vw; */
+    min-height: 25vh;
+    max-height: 45vh;
+    width: fit-content;
     display: inline-block;
     overflow: scroll;
-    border-radius: 1vh;
-    box-shadow:4px 6px 7px 4px rgb(105, 105, 105);
-    
+    border-radius: 2vh;
+    background-color: white;
+    /* box-shadow:2px 4px 4px 3px rgb(145, 144, 144); */
+    /* box-shadow:4px 6px 7px 4px rgb(223, 171, 2); */
+    transition: box-shadow 200ms ease-in;
+}
+
+.Single-item:hover{
+    /* box-shadow:4px 6px 7px 4px rgb(24, 24, 24); */
+    box-shadow:2px 5px 5px 4px rgb(145, 144, 144);
 }
 
 .Item-image{
     height: 24vh;
-    min-width: 10vw;
+    min-width: 12vw;
     /* min-width: 20vw; */
+    object-fit: cover;
 }
 
 .Item-title{
@@ -29,9 +38,9 @@ p {
 .price{
     font-weight: bolder;
     font-size: .8em;
-    color: rgb(15, 29, 1);
+    color: rgb(255, 255, 255);
     border-radius: 1em;
-    padding:0.2em 0.6em;
+    padding:0.3em 0.6em;
     background-color: rgb(82, 161, 3);
 }
 .Decrement-button{
