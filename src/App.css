@@ -1,38 +1,86 @@
 .App {
+  /* color: antiquewhite; */
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+  background-color: #000000;
+  height: 10vh;
   display: flex;
+  position: fixed;
+  width: 100%;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+  display: flex;                  /* establish flex container */
+  flex-direction: row;            /* default value; can be omitted */
+  flex-wrap: nowrap;              /* default value; can be omitted */
+  justify-content: space-between;
 }
 
-.App-link {
-  color: #61dafb;
+
+.App-body{
+  padding-top:10vh;
+  /* background-image: url(./media/backgroundImage.jpg); */
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-color: #fdfdfd;
+  /* background-attachment: fixed; */
+  height: 100vh;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.Categories{
+  width: 100%;
+  height:5vh;
+  background: rgb(177, 150, 150);
+  
 }
+.Categories button{
+  height:5vh;
+  width: 7vw;
+  font-weight: bolder;
+  margin: 0px 35px;
+  color: rgb(14, 14, 14);
+  background-color: rgb(170, 128, 128);
+  color: antiquewhite;
+  border: none;
+  cursor: pointer;
+}
+
+.Categories button:hover{
+  background-color: rgb(197, 103, 103);
+}
+
+
+/* ------- Side bar Buttons ------- */
+
+.Menu-button{
+  height: 4vh;
+  width: 5vh;
+  top: 0;
+  margin-left: 10px;
+  border-radius: 1vh;
+  float: left;
+  transition: box-shadow 200ms ease-in;
+}
+.Menu-button:hover{
+  cursor: pointer;
+  box-shadow:4px 6px 7px 4px rgb(202, 202, 200);
+}
+.Cart-button{
+  height: 4vh;
+  top: 0;
+  margin-right: 10px;
+  /* border: 2px solid rgb(214, 0, 0); */
+  border-radius: 1vh;
+  transition: box-shadow 200ms ease-in;
+  /* image-shadow:5px 10px 10px 2px rgb(202, 202, 200); */
+}
+.Cart-button:hover{
+  cursor: pointer;
+  box-shadow:4px 6px 7px 4px rgb(202, 202, 200);
+}
+
+/* ^^^^^^^^^^^^^^ Side bar Buttons ^^^^^^^^^^^^^^ */

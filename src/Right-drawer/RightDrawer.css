@@ -1,0 +1,18 @@
+.Right-drawer{
+    height: 90vh;
+    width: 20vw;
+    right:0;
+    background: rgba(0, 0, 0, 0.719);
+    z-index: 500;
+    position: fixed;
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 30px 0  0 30px;
+}
+
+.Right-drawer-open{
+    transform: translateX(0);
+}
+
+.Right-drawer-close{
+    transform: translateX(+100%);
+}
