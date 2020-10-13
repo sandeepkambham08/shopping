@@ -7,6 +7,7 @@ import './App.css';
 
 import Leftdrawer from './Left-drawer/LeftDrawer';
 import Rightdrawer from './Right-drawer/RightDrawer';
+import Categories from './Categories/Categories'
 
 import Items from './Items/Items.js'
 
@@ -33,7 +34,7 @@ class App extends Component {
   }
 
   categorySelection = (category) =>{
-    console.log(category);
+    // console.log(category);
     this.setState({selectedCategory:category});
   }
 
@@ -55,12 +56,9 @@ class App extends Component {
           isMenuOpen = {this.state.rightMenuOpen}
           backdropClicked = {this.rightDrawerOpen}
           />
-          <div className='Categories'>
-            <button onClick={()=>this.categorySelection('vegetable')}>Vegetables</button>
-            <button onClick={()=>this.categorySelection('fruit')}>Fruits</button>
-            <button onClick={()=>this.categorySelection('dairy')}>Dairy</button>
-            <button onClick={()=>this.categorySelection('bakery')}>Bakery</button>
-          </div>
+          <Categories
+          categorySelection={this.categorySelection}
+          selectedCategory = {this.state.selectedCategory}/>
           <Items
           selectedCategory = {this.state.selectedCategory}/>
           {/* <img src={background} className='Background-image'/> */}

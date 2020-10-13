@@ -31,27 +31,6 @@
   height: 100vh;
 }
 
-.Categories{
-  width: 100%;
-  height:5vh;
-  background: rgb(177, 150, 150);
-  
-}
-.Categories button{
-  height:5vh;
-  width: 7vw;
-  font-weight: bolder;
-  margin: 0px 35px;
-  color: rgb(14, 14, 14);
-  background-color: rgb(170, 128, 128);
-  color: antiquewhite;
-  border: none;
-  cursor: pointer;
-}
-
-.Categories button:hover{
-  background-color: rgb(197, 103, 103);
-}
 
 
 /* ------- Side bar Buttons ------- */

@@ -7,25 +7,31 @@ import './Items.css';
 // itemsData.forEach(element => {
 //     console.log(element);
 // });
-const Items = (props) =>{
+const Items = (props) => {
     // let unique = [...new Set(itemsData.type)];
     // console.log(unique);
-    return(
+    return (
         <div>
-            <p>All items list here</p>  
-            {itemsData.map(element=>{
-                if(element.type===props.selectedCategory){
-                    return(
+            <p>All items list here</p>
+            {itemsData.map(element => {
+                if (element.type === props.selectedCategory) {
+                    return (
                         <div className='Single-item' key={element.title}>
-                            <img className='Item-image' src={require("../media/ItemImages/"+element.filename)} alt={element.description}/>
-                            <p className='Item-title'>{element.title} <span className='price' style={{textAlign:'right'}} > ${element.price}</span>  </p>
+                            <img className='Item-image' src={require("../media/ItemImages/" + element.filename)} alt={element.description} />
+                            <p className='Item-title' >{element.title} <span className='price' style={{ textAlign: 'right' }} > ${element.price}</span> </p>
+                            <button className='Decrement-button'>-</button>
+                            <span>{}</span>
+                            <button className='Increment-button'>+</button>
+                            <br></br>
+                            <br></br>
+                            <br></br>
                             {/* <p>{element.description}</p> */}
-                            
+
                         </div>
-                        
+
                     )
                 }
-                
+
             })}
         </div>
     )
