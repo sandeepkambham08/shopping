@@ -3,6 +3,15 @@
   text-align: center;
 }
 
+img{
+  /* user-drag: none;  */
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-drag: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+}
+
 .App-header {
   background-color: #045701;
   height: 10vh;
@@ -18,8 +27,12 @@
   flex-direction: row;            /* default value; can be omitted */
   flex-wrap: nowrap;              /* default value; can be omitted */
   justify-content: space-between;
+  transition:  background-color 200ms ease-in-out;
 }
 
+.transparent{
+  background-color: #0457019d;
+}
 
 .App-body{
   padding-top:10vh;

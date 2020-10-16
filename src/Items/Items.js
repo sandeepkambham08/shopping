@@ -18,7 +18,7 @@ class Items extends Component {
         itemsData:itemsData,
     }
      decreaseQuantity=(item)=>{
-         const that = this;
+        //  const that = this;
         console.log(this.state.quantity);
         // console.log(this.state.cart);
 
@@ -39,7 +39,7 @@ class Items extends Component {
     }
 
      increaseQuantity=(item)=>{
-        const that = this;
+        // const that = this;
         console.log({item})
         console.log(item.quantity);
 
@@ -65,7 +65,7 @@ class Items extends Component {
     }
 
     render(){
-        let totalCartItems = 0 ; 
+        let totalCartItems, totalPrice = 0 ; 
         totalCartItems = Object.keys(this.state.cart).length; 
         // Object.keys(this.state.cart).map(cartItem=>{
         //     totalCartItems = totalCartItems+this.state.cart[cartItem].quantity;
@@ -110,11 +110,12 @@ class Items extends Component {
             <div>
                 <p>Cart Items</p>
                 {Object.keys(this.state.cart).map(cartItem=>{
-                    console.log(this.state.cart[cartItem]);
+                    // console.log(this.state.cart[cartItem]);
                     if(this.state.cart[cartItem].quantity){
+                        totalPrice = totalPrice + (this.state.cart[cartItem].quantity *  this.state.cart[cartItem].price);
                         return(
-                            <div>
-                            <p key={cartItem} >{this.state.cart[cartItem].title} Quantity : {this.state.cart[cartItem].quantity}</p>
+                            <div key={cartItem} >
+                            <p>{this.state.cart[cartItem].title} Quantity : {this.state.cart[cartItem].quantity}</p>
                             {/* <img className='Item-image' src={require("../media/ItemImages/" + item.filename)} alt={item.description} /> */}
                             <span>{ this.state.cart[cartItem].quantity} * ${this.state.cart[cartItem].price}</span>
                             <span className='price' style={{ textAlign: 'center', margin:'10px 10px'}} > ${ this.state.cart[cartItem].quantity *  this.state.cart[cartItem].price}</span>
@@ -122,7 +123,9 @@ class Items extends Component {
                             )
                     }
                 })}
+                <p>----------------------------------------------</p>
                 <p>Total items in cart : {totalCartItems}</p>
+                <p className='price' style={{ textAlign: 'center',width:'20%' , margin:'auto'}} >Total Price cart : {totalPrice}</p>
             </div>
             </div>
         )

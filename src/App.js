@@ -6,6 +6,8 @@ import cart from './media/cart1.jpg';
 import './App.css';
 import StarRatings from 'react-star-ratings';
 
+import _ from 'lodash';
+
 import Leftdrawer from './Left-drawer/LeftDrawer';
 import Rightdrawer from './Right-drawer/RightDrawer';
 import Categories from './Categories/Categories'
@@ -39,6 +41,24 @@ class App extends Component {
     this.setState({selectedCategory:category});
   }
 
+  checkHeader = _.throttle(() => {
+    // Run JavaScript stuff here
+    let scrollPosition = Math.round(window.scrollY);
+    console.log('scrolling' + scrollPosition)
+    if (scrollPosition > 70) {
+      document.querySelector('header').classList.add('transparent');
+      // document.querySelector(".App-logo").classList.add('sticky');
+      // document.querySelector(".userLogo").classList.add('sticky');
+    }
+    // If not, remove "sticky" class from header
+    else if (scrollPosition < 10) {
+      document.querySelector('header').classList.remove('transparent');
+      // document.querySelector(".App-logo").classList.remove('sticky');
+      // document.querySelector(".userLogo").classList.remove('sticky');
+    }
+
+  }, 400);
+
   render(){
     return (
       <div className="App">
@@ -48,6 +68,7 @@ class App extends Component {
             <img src={cart} onClick={()=>this.rightDrawerOpen()} className='Cart-button' alt="menu-button"/>
         </header>
         <div className='App-body'>
+        {window.addEventListener('scroll', this.checkHeader)}
           {/* <p>testing</p> */}
           <Leftdrawer
           isMenuOpen = {this.state.leftMenuOpen}
