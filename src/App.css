@@ -48,7 +48,7 @@
 }
 .Menu-button:hover{
   cursor: pointer;
-  box-shadow:4px 6px 7px 4px rgb(202, 202, 200);
+  box-shadow:4px 6px 7px 4px rgb(46, 45, 45);
 }
 .Cart-button{
   height: 4vh;
@@ -61,7 +61,7 @@
 }
 .Cart-button:hover{
   cursor: pointer;
-  box-shadow:4px 6px 7px 4px rgb(202, 202, 200);
+  box-shadow:4px 6px 7px 4px rgb(46, 45, 45);
 }
 
 /* ^^^^^^^^^^^^^^ Side bar Buttons ^^^^^^^^^^^^^^ */

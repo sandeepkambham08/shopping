@@ -1,50 +1,133 @@
-import React from 'react';
+import React, { Component } from 'react';
 import itemsData from '../data/products.json';
 import './Items.css';
 // import i from '../media/ItemImages/1.jpg';
 import StarRatings from 'react-star-ratings';
 
 // console.log(itemsData);
-// itemsData.forEach(element => {
-//     console.log(element);
+// itemsData.forEach(item => {
+//     console.log(item);
 // });
-const Items = (props) => {
+
+class Items extends Component {
     // let unique = [...new Set(itemsData.type)];
     // console.log(unique);
-    return (
-        <div>
-            {/* <p>All items list here</p> */}
-            <br></br><br></br>
+    state={
+        quantity:0,
+        cart:{},
+        itemsData:itemsData,
+    }
+     decreaseQuantity=(item)=>{
+         const that = this;
+        console.log(this.state.quantity);
+        // console.log(this.state.cart);
 
-            {itemsData.map(element => {
-                if (element.type === props.selectedCategory) {
-                    return (
-                        <div className='Single-item' key={element.title}>
-                            <img className='Item-image' src={require("../media/ItemImages/" + element.filename)} alt={element.description} />
-                            <p className='Item-title' >{element.title}</p>
-                            <p className='price' style={{ textAlign: 'center',objectFit:'contain' }} > ${element.price}</p>
-                            <button className='Decrement-button'>-</button>
-                            <span>{0}</span>
-                            <button className='Increment-button'>+</button>
-                            <br></br>
-                            <StarRatings
-                                rating={element.rating}
-                                starDimension="15px"
-                                starSpacing="3px"
-                                starRatedColor='#ffd51c'
-                                style={{zIndex:'50'}}
-                            />
-                            <br></br>
-                            {/* <p>{element.description}</p> */}
+        // Find item and update its quantity // 
+        const indexFound = this.state.itemsData.findIndex(result=> result.title===item.title);
+        console.log(indexFound);
+        let newArray = [...this.state.itemsData];
+        newArray[indexFound]={...newArray[indexFound],quantity:newArray[indexFound].quantity-1};
+        this.setState({itemsData:newArray},()=>{
+            this.setState({cart: {...this.state.cart, [item.title]: this.state.itemsData[indexFound]}},()=>{
+                console.log(this.state.cart);
+                
+            });
+        });
+        // ^^^^^ Find item and update its quantity ^^^^^ // 
 
-                        </div>
+        
+    }
 
-                    )
-                }
+     increaseQuantity=(item)=>{
+        const that = this;
+        console.log({item})
+        console.log(item.quantity);
 
-            })}
-        </div>
-    )
+        // Find item and update its quantity // 
+        const indexFound = this.state.itemsData.findIndex(result=> result.title===item.title);
+        console.log(indexFound);
+        let newArray = [...this.state.itemsData];
+        newArray[indexFound]={...newArray[indexFound],quantity:newArray[indexFound].quantity+1};
+        this.setState({itemsData:newArray},()=>{
+            this.setState({cart: {...this.state.cart, [item.title]: this.state.itemsData[indexFound]}},()=>{
+                console.log(this.state.cart);
+                Object.keys(this.state.cart).forEach(cartItem=>{
+                    console.log(cartItem);
+                })
+                // that.state.cart.map(cartItem=>{
+                //     console.log(cartItem);
+                // })
+
+            });
+        });
+        // ^^^^^ Find item and update its quantity ^^^^^ // 
+       
+    }
+
+    render(){
+        let totalCartItems = 0 ; 
+        totalCartItems = Object.keys(this.state.cart).length; 
+        // Object.keys(this.state.cart).map(cartItem=>{
+        //     totalCartItems = totalCartItems+this.state.cart[cartItem].quantity;
+        //     // console.log(this.state.cart.length())
+        // });
+
+        return (
+            <div>
+                {/* <p>All items list here</p> */}
+                <br></br><br></br>
+    
+                {this.state.itemsData.map(item => {
+                    if (item.type === this.props.selectedCategory) {
+                        return (
+                            <div className='Single-item' key={item.title}>
+                                <img className='Item-image' src={require("../media/ItemImages/" + item.filename)} alt={item.description} />
+                                <p className='Item-title' >{item.title}</p>
+                                
+                                <span><StarRatings
+                                    rating={item.rating}
+                                    starDimension="15px"
+                                    starSpacing="3px"
+                                    starRatedColor='#ffd51c'
+                                    style={{zIndex:'50'}}
+                                /></span>
+                                <span className='price' style={{ textAlign: 'center', margin:'10px 10px'}} > ${item.price}</span>
+                                <br></br><br></br>
+                                <button className='Decrement-button' hidden={item.quantity<=0} onClick={()=>this.decreaseQuantity(item)}>-</button>
+                                <span hidden={item.quantity<=0} style={{marginRight:'1em'}} >{item.quantity}</span>
+                                <button className='Increment-button' onClick={()=>this.increaseQuantity(item)}>+</button>
+                                <br></br>
+                                
+                                <br></br>
+                                {/* <p>{item.description}</p> */}
+    
+                            </div>
+    
+                        )
+                    }
+    
+                })}
+            <div>
+                <p>Cart Items</p>
+                {Object.keys(this.state.cart).map(cartItem=>{
+                    console.log(this.state.cart[cartItem]);
+                    if(this.state.cart[cartItem].quantity){
+                        return(
+                            <div>
+                            <p key={cartItem} >{this.state.cart[cartItem].title} Quantity : {this.state.cart[cartItem].quantity}</p>
+                            {/* <img className='Item-image' src={require("../media/ItemImages/" + item.filename)} alt={item.description} /> */}
+                            <span>{ this.state.cart[cartItem].quantity} * ${this.state.cart[cartItem].price}</span>
+                            <span className='price' style={{ textAlign: 'center', margin:'10px 10px'}} > ${ this.state.cart[cartItem].quantity *  this.state.cart[cartItem].price}</span>
+                            </div>
+                            )
+                    }
+                })}
+                <p>Total items in cart : {totalCartItems}</p>
+            </div>
+            </div>
+        )
+    }
+    
 }
 
 export default Items;

@@ -60,7 +60,7 @@ p {
     border: none;
     font-size: 1.5em;
     border-radius: 0.4em;
-    margin-left: 1em;
+    /* margin-left: 1em; */
     background-color: rgba(0, 196, 10, 0.329);
 }
 .Increment-button:hover{
