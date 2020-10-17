@@ -65,7 +65,10 @@ class App extends Component {
        <header className="App-header">
             <img src={menu} onClick={()=>this.LeftdrawerOpen()} className='Menu-button' alt="menu-button"/>
             <p> The <span style={{fontWeight:"bolder", fontStyle:'italic',  textShadow:'3px 3px 7px #0f0f0f'}}>Shopping</span> store you love </p>
+            <div>
+            <span className='Items-Count'>1</span>
             <img src={cart} onClick={()=>this.rightDrawerOpen()} className='Cart-button' alt="menu-button"/>
+            </div>
         </header>
         <div className='App-body'>
         {window.addEventListener('scroll', this.checkHeader)}

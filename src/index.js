@@ -4,10 +4,20 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
+// --------------------------------------------    REDUX  --------------------------------------------   //  
+import { createStore } from 'redux';          // To initialise store concept 
+import reducer from './store/reducer';        // To use reducer file 
+import {Provider} from  'react-redux';        // To connect react and redux 
+
+const store = createStore(reducer);
+
+// --------------------------------------------    REDUX  --------------------------------------------   //  
+
 ReactDOM.render(
+  <Provider store={store}>
   <React.StrictMode>
     <App />
-  </React.StrictMode>,
+  </React.StrictMode></Provider>,
   document.getElementById('root')
 );
 

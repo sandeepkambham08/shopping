@@ -28,6 +28,7 @@ img{
   flex-wrap: nowrap;              /* default value; can be omitted */
   justify-content: space-between;
   transition:  background-color 200ms ease-in-out;
+  z-index: 200;
 }
 
 .transparent{
@@ -46,7 +47,17 @@ img{
   padding-bottom: 10%;
 }
 
-
+.Items-Count{
+  font-size: .5em;
+  padding: 5px 10px;
+  top: 5vh;
+  right: 2.3vw;
+  margin-bottom: 10vh;
+  background-color: rgb(224, 15, 15);
+  position: absolute;
+  z-index: 300;
+  border-radius: 2em;
+}
 
 /* ------- Side bar Buttons ------- */
 

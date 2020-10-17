@@ -4,6 +4,8 @@ import './Items.css';
 // import i from '../media/ItemImages/1.jpg';
 import StarRatings from 'react-star-ratings';
 
+import {connect} from 'react-redux';
+
 // console.log(itemsData);
 // itemsData.forEach(item => {
 //     console.log(item);
@@ -48,16 +50,10 @@ class Items extends Component {
         console.log(indexFound);
         let newArray = [...this.state.itemsData];
         newArray[indexFound]={...newArray[indexFound],quantity:newArray[indexFound].quantity+1};
+
         this.setState({itemsData:newArray},()=>{
             this.setState({cart: {...this.state.cart, [item.title]: this.state.itemsData[indexFound]}},()=>{
                 console.log(this.state.cart);
-                Object.keys(this.state.cart).forEach(cartItem=>{
-                    console.log(cartItem);
-                })
-                // that.state.cart.map(cartItem=>{
-                //     console.log(cartItem);
-                // })
-
             });
         });
         // ^^^^^ Find item and update its quantity ^^^^^ // 
@@ -75,30 +71,33 @@ class Items extends Component {
         return (
             <div>
                 {/* <p>All items list here</p> */}
+                <p>This is from redux : {this.props.ctr}</p>
+                <button className='Increment-button' onClick={()=>this.props.onIncrementCounter()}>+</button>
                 <br></br><br></br>
     
-                {this.state.itemsData.map(item => {
+                {this.props.itemsDataRedux.map(item => {
                     if (item.type === this.props.selectedCategory) {
                         return (
                             <div className='Single-item' key={item.title}>
                                 <img className='Item-image' src={require("../media/ItemImages/" + item.filename)} alt={item.description} />
                                 <p className='Item-title' >{item.title}</p>
                                 
-                                <span><StarRatings
+                                <span style={{zIndex:'50'}}><StarRatings
                                     rating={item.rating}
                                     starDimension="15px"
                                     starSpacing="3px"
                                     starRatedColor='#ffd51c'
-                                    style={{zIndex:'50'}}
                                 /></span>
                                 <span className='price' style={{ textAlign: 'center', margin:'10px 10px'}} > ${item.price}</span>
                                 <br></br><br></br>
-                                <button className='Decrement-button' hidden={item.quantity<=0} onClick={()=>this.decreaseQuantity(item)}>-</button>
+                                {/* <button className='Decrement-button' hidden={item.quantity<=0} onClick={()=>this.decreaseQuantity(item)}>-</button> */}
+                                <button className='Decrement-button' hidden={item.quantity<=0} onClick={()=>this.props.decreaseItemQuantity(item)}>-</button>
                                 <span hidden={item.quantity<=0} style={{marginRight:'1em'}} >{item.quantity}</span>
-                                <button className='Increment-button' onClick={()=>this.increaseQuantity(item)}>+</button>
+                                {/* <button className='Increment-button' onClick={()=>this.increaseQuantity(item)}>+</button> */}
+                                <button className='Increment-button' onClick={()=>this.props.increaseItemQuantity(item)}>+</button>
                                 <br></br>
                                 
-                                <br></br>
+                                <br></br> 
                                 {/* <p>{item.description}</p> */}
     
                             </div>
@@ -124,6 +123,7 @@ class Items extends Component {
                     }
                 })}
                 <p>----------------------------------------------</p>
+                
                 <p>Total items in cart : {totalCartItems}</p>
                 <p className='price' style={{ textAlign: 'center',width:'20%' , margin:'auto'}} >Total Price cart : {totalPrice}</p>
             </div>
@@ -133,4 +133,31 @@ class Items extends Component {
     
 }
 
-export default Items;
+const mapStateToProps = state =>{
+    return{
+        ctr : state.counter,
+        itemsDataRedux : state.itemsData,
+    };
+};
+
+// const itemsTemp = this.props.itemsDataRedux;
+
+const mapDispatchToProps = dispatch =>{
+    const that = this;
+    return {
+        onIncrementCounter : () => {
+            console.log('inside increment dispatch')
+            dispatch({type:'INCREMENT'})
+        },
+        increaseItemQuantity : (item) =>{
+            console.log('Item count should be increased', item);
+            dispatch({type:'ITEM_INCREASE',item:item});
+        },
+        decreaseItemQuantity : (item) =>{
+            console.log('Item count should be increased', item);
+            dispatch({type:'ITEM_DECREASE',item:item});
+        }
+    };
+};
+
+export default connect(mapStateToProps,mapDispatchToProps)(Items);
