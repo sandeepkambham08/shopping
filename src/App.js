@@ -14,6 +14,8 @@ import Categories from './Categories/Categories'
 
 import Items from './Items/Items.js'
 
+import {connect} from 'react-redux';      // To access the store
+
 class App extends Component {
 
   state = {
@@ -60,14 +62,22 @@ class App extends Component {
   }, 400);
 
   render(){
+    let totalCartItems = 0 ; 
+        // totalCartItems = Object.keys(this.props.cart).length; 
+    {Object.keys(this.props.cart).map(cartItem=>{
+          // console.log(this.state.cart[cartItem]);
+          if(this.props.cart[cartItem].quantity){
+              totalCartItems = totalCartItems+1;
+          }
+    })}
     return (
       <div className="App">
        <header className="App-header">
             <img src={menu} onClick={()=>this.LeftdrawerOpen()} className='Menu-button' alt="menu-button"/>
             <p> The <span style={{fontWeight:"bolder", fontStyle:'italic',  textShadow:'3px 3px 7px #0f0f0f'}}>Shopping</span> store you love </p>
-            <div>
-            <span className='Items-Count'>1</span>
-            <img src={cart} onClick={()=>this.rightDrawerOpen()} className='Cart-button' alt="menu-button"/>
+            <div onClick={()=>this.rightDrawerOpen()} >
+            <span className='Items-Count'>{totalCartItems}</span>
+            <img src={cart} className='Cart-button' alt="menu-button"/>
             </div>
         </header>
         <div className='App-body'>
@@ -93,4 +103,10 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = state =>{
+  return{
+      cart : state.cart,
+  };
+};
+
+export default connect(mapStateToProps)(App);

@@ -57,6 +57,7 @@ img{
   position: absolute;
   z-index: 300;
   border-radius: 2em;
+  cursor: pointer;
 }
 
 /* ------- Side bar Buttons ------- */

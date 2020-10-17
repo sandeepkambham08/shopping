@@ -2,7 +2,7 @@
     height: 90vh;
     width: 20vw;
     right:0;
-    background: rgba(0, 0, 0, 0.719);
+    background: rgb(255, 255, 255);
     z-index: 500;
     position: fixed;
     transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
@@ -15,4 +15,37 @@
 
 .Right-drawer-close{
     transform: translateX(+100%);
+}
+
+.Cart-item{
+    width: 90%;
+    overflow: hidden;
+    /* border: 1px solid rgb(252, 252, 252); */
+    background-color: rgba(255, 248, 220, 0.829);
+    border-radius: 2em;
+    margin: 1vh auto;
+    text-align: center;
+    box-shadow:2px 5px 5px 4px rgb(212, 212, 212);
+}
+
+.Cart-item-image{
+    /* overflow: hidden; */
+    max-height: 13vh; 
+    min-height: 13vh;
+    width: 40%;
+    /* margin-left: 5%; */
+    float: left;
+    border-radius: 1em 0 0 0;
+    /* min-width: 20vw; */
+    object-fit: cover;
+    /* user-drag: none;  */
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-drag: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+}
+.Cart-item-details{
+margin-left:45%;
+min-height: 5%;
 }
