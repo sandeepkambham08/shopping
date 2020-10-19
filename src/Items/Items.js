@@ -42,9 +42,11 @@ class Items extends Component {
                     if (item.type === this.props.selectedCategory) {
                         return (
                             <div className='Single-item' key={item.title}>
+                               <div style={{height:'30vh'}}>
                                 <img className='Item-image' src={require("../media/ItemImages/" + item.filename)} alt={item.description} />
+                                </div>
+                                <div style={{height:'12vh'}}>
                                 <p className='Item-title' >{item.title}</p>
-
                                 <span style={{ zIndex: '50' }}><StarRatings
                                     rating={item.rating}
                                     starDimension="15px"
@@ -58,9 +60,7 @@ class Items extends Component {
                                 <span hidden={item.quantity <= 0} style={{ marginRight: '1em' }} >{item.quantity}</span>
                                 {/* <button className='Increment-button' onClick={()=>this.increaseQuantity(item)}>+</button> */}
                                 <button className='Increment-button' onClick={() => this.props.increaseItemQuantity(item)}>+</button>
-                                <br></br>
-
-                                <br></br>
+                                </div>
                                 {/* <p>{item.description}</p> */}
 
                             </div>
@@ -69,7 +69,7 @@ class Items extends Component {
                     }
 
                 })}
-                <div>
+                {/* <div>
                     <p>Cart Items</p>
                     {Object.keys(this.props.cart).map(cartItem => {
                         // console.log(this.state.cart[cartItem]);
@@ -79,7 +79,7 @@ class Items extends Component {
                             return (
                                 <div key={cartItem} >
                                     <p>{this.props.cart[cartItem].title} Quantity : {this.props.cart[cartItem].quantity}</p>
-                                    {/* <img className='Item-image' src={require("../media/ItemImages/" + item.filename)} alt={item.description} /> */}
+                                    <img className='Item-image' src={require("../media/ItemImages/" + item.filename)} alt={item.description} />
                                     <span>{this.props.cart[cartItem].quantity} * ${this.props.cart[cartItem].price}</span>
                                     <span className='price' style={{ textAlign: 'center', margin: '10px 10px' }} > ${Math.round(this.props.cart[cartItem].quantity * this.props.cart[cartItem].price * 100) / 100}</span>
                                 </div>
@@ -91,7 +91,7 @@ class Items extends Component {
                     <p>Total items in cart : {totalCartItems}</p>
                     <p>{totalPrice}</p>
                     <p className='price' style={{ textAlign: 'center', width: '20%', margin: 'auto' }} >Total Price cart : {Math.round(totalPrice * 100) / 100}</p>
-                </div>
+                </div> */}
             </div>
         )
     }

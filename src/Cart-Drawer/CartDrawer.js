@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import './RightDrawer.css';
+import './CartDrawer.css';
 
 import Backdrop from '../Backdrop/Backdrop.js';
 
 import { connect } from 'react-redux';      // To access the store
 import { render } from '@testing-library/react';
 
-class rightDrawer extends Component {
+class Cart extends Component {
 
     render() {
         let Right_Drawer = ['Right-drawer', 'Right-drawer-close'];
@@ -52,12 +52,12 @@ class rightDrawer extends Component {
                                 
                             }
                         })}
-                        {/* {totalCartItems && <div>
-                        <p>---------------------------</p>
-                        <p>Total items in cart : {totalCartItems}</p>
-                        <p className='price' style={{ textAlign: 'center',width:'20%' , margin:'auto'}} >Total Price cart : {Math.round(totalPrice*100)/100}</p>
+                        {totalCartItems && <div>
+                        {/* <p>---------------------------</p> */}
+                        {/* <p>Total items in cart : {totalCartItems}</p> */}
+                        <p className='Checkout-button' style={{ textAlign: 'center',width:'50%' , margin:'auto'}} >Checkout: ${Math.round(totalPrice*100)/100}</p>
                         </div>}
-                        {!totalCartItems && <p> Cart is empty, start shopping ! </p>} */}
+                        {!totalCartItems && <p> Cart is empty, start shopping ! </p>}
                     </div>
                     <p>{this.props.isMenuOpen}</p>
                 </div>
@@ -86,4 +86,4 @@ const mapDispatchToProps = dispatch => {
 };
 
 
-export default connect(mapStateToProps,mapDispatchToProps)(rightDrawer);
+export default connect(mapStateToProps,mapDispatchToProps)(Cart);
