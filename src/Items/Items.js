@@ -34,8 +34,8 @@ class Items extends Component {
         return (
             <div>
                 {/* <p>All items list here</p> */}
-                <p>This is from redux : {this.props.ctr}</p>
-                <button className='Increment-button' onClick={() => this.props.onIncrementCounter()}>+</button>
+                {/* <p>This is from redux : {this.props.ctr}</p> */}
+                {/* <button className='Increment-button' onClick={() => this.props.onIncrementCounter()}>+</button> */}
                 <br></br><br></br>
 
                 {this.props.itemsDataRedux.map(item => {

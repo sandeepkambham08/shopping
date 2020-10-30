@@ -6,6 +6,8 @@ Shopping website
     - Make quantity adjustments from the cart 
     - See item avg review
 
+![Alt text](./src/media/shopping_cart_screenshot.png?raw=true "shopping_cart_screenshot")
+
 ## Experiences gained by developing this project 
     - How to use redux as a global state for the app.
     - How to update state immutabily
@@ -20,6 +22,7 @@ Shopping website
     - React (https://www.npmjs.com/package/react)
     - React-redux (https://www.npmjs.com/package/react-redux)
     - StarRatings (https://www.npmjs.com/package/react-star-ratings)
+
 
 ## How to run on your system 
     1. Clone this repository 
