@@ -24,9 +24,8 @@ const reducer = (state = initialState, action) => {
         return {
             ...state,
             itemsData: newArray,
-            cart: { ...state.cart, [action.item.title]: newArray[indexFound] },
+            cart: { ...state.cart, [action.item.title]: newArray[indexFound]},
         }
-
     }
     if (action.type === 'ITEM_DECREASE') {
         console.log(action.item.title);

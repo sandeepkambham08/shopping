@@ -2,7 +2,7 @@
     width: 20vw;
     background: rgb(42, 42, 43);
     height: 90vh;
-    z-index: 500;
+    z-index: 700;
     position: fixed;
     transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     border-radius: 0 30px 30px 0 ;
