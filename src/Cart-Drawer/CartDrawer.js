@@ -10,11 +10,22 @@ import AddressForm  from '../AddressForm/AddressForm.js'
 
 class Cart extends Component {
 
+    state={
+        checkoutOpen:false,
+    }
+
+    OpenCheckout=()=>{
+        this.setState({checkoutOpen:true})
+    }
     render() {
         let Right_Drawer = ['Right-drawer', 'Right-drawer-close'];
-        if (this.props.isMenuOpen) {
+        if (this.props.isMenuOpen && !this.state.checkoutOpen) {
             Right_Drawer = ['Right-drawer', 'Right-drawer-open'];
         }
+        if (this.props.isMenuOpen && this.state.checkoutOpen) {
+            Right_Drawer = ['Right-drawer',  'check-out-open'];
+        }
+
         let totalCartItems = 0;
         let totalPrice = 0;
         return (
@@ -59,7 +70,7 @@ class Cart extends Component {
                         {totalCartItems && <div>
                             {/* <p>---------------------------</p> */}
                             {/* <p>Total items in cart : {totalCartItems}</p> */}
-                            <p className='Checkout-button' style={{ textAlign: 'center', width: '50%', margin: 'auto' }} >Checkout: ${Math.round(totalPrice * 100) / 100}</p>
+                            <p className='Checkout-button' onClick={()=>{this.OpenCheckout()}} style={{ textAlign: 'center', width: '50%', margin: 'auto' }} >Checkout: ${Math.round(totalPrice * 100) / 100}</p>
                             
                         </div>}
                         {!totalCartItems && <p> Cart is empty,s start shopping ! </p>}

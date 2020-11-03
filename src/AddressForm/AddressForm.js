@@ -10,12 +10,13 @@ const AddressForm=()=>{
         autocomplete = new google.maps.places.Autocomplete((document.getElementById(searchLocation)), {
         types: ['geocode'],
         componentRestrictions:{'country':['CA']},
-        fields:['place_id','geometry']
+        // fields:['place_id','geometry']
     });
-    autocomplete.addListener('place_changed',onPlaceChanged);
+    autocomplete.addListener('place_changed',onPlaceChanged(autocomplete));
     })
-    function onPlaceChanged(){
-        
+    function onPlaceChanged(autocomplete){
+        var place = autocomplete.getPlace();
+        console.log(place);
     }
 return (
     <div>
