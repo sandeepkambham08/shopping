@@ -1,6 +1,6 @@
 .Right-drawer{
     height: 90vh;
-    width: 20vw;
+    width: 70vw;
     right:0;
     background: rgba(255, 255, 255, 0.877);
     z-index: 500;
@@ -65,4 +65,16 @@ min-height: 5%;
 
 .Checkout-button:hover{
     box-shadow:2px 3px 5px 4px rgb(131, 129, 129);
+}
+
+.split-left{
+    width: 45%;
+    float: left;
+    margin-left: 5%;
+}
+
+.split-right{
+    width: 45%;
+    float: left;
+    margin-right: 5%;
 }

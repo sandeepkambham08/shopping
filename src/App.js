@@ -20,7 +20,7 @@ class App extends Component {
 
   state = {
     leftMenuOpen: false,
-    cartMenuOpen:false,
+    cartMenuOpen:true,
     selectedCategory:'fruit',
   }
   

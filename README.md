@@ -25,12 +25,18 @@ Shopping website
 
 
 ## How to run on your system 
-  1. Clone this repository 
-     - git clone [repository URL]    
-    find the repository URL above 
-  2. Make the project your working directory 
-     - cd [local repository]
-  3. Install the application modules by typing 
-     - npm install
-  4. Finally run the app by typing 
-     - npm start
+1. Clone this repository(find the repository URL above)
+  
+  `$ git clone [repository URL]`
+  
+2. Make the project your working directory 
+  
+  `$ cd [local repository]`
+  
+3. Install the application modules by typing 
+  
+  `$ npm install`
+  
+4. Finally run the app by typing
+  
+  `$ npm start`
