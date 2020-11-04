@@ -6,16 +6,20 @@ import Backdrop from '../Backdrop/Backdrop.js';
 import { connect } from 'react-redux';      // To access the store
 import { render } from '@testing-library/react';
 import PayPal from '../PayPal/PayPal.js';
-import AddressForm  from '../AddressForm/AddressForm.js'
+import AddressForm  from '../AddressForm/AddressForm.js';
+import PersonalDetails from '../PersonalDetails/PersonalDetails.js'
 
 class Cart extends Component {
 
     state={
-        checkoutOpen:false,
+        checkoutOpen:true,
     }
 
     OpenCheckout=()=>{
         this.setState({checkoutOpen:true})
+    }
+    closeCheckout=()=>{
+        this.setState({checkoutOpen:false})
     }
     render() {
         let Right_Drawer = ['Right-drawer', 'Right-drawer-close'];
@@ -77,7 +81,9 @@ class Cart extends Component {
 
                     </div>
                     <div className='split-right'>
-                        <br></br>
+                        
+                        <button className='closeCheckoout-button' onClick={()=>{this.closeCheckout()}}>Back</button>
+                        <PersonalDetails/>
                         <AddressForm/>
                         <PayPal
                         total={totalPrice} />

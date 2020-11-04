@@ -1,6 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Syne&display=swap');
 .App {
   /* color: antiquewhite; */
   text-align: center;
+}
+
+html *
+{
+   font-family: 'Syne', sans-serif !important ;
+   overscroll-behavior-y: none;
 }
 
 img{

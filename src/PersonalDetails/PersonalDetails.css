@@ -1,0 +1,32 @@
+.personal-details-form{
+    width: 99%;
+    margin: 1em 0 1em 0;
+    /* background-color: antiquewhite; */
+    border-radius: 1em;
+    padding: 1em;
+}
+
+.field {
+    height: 2em;
+    border-radius: 0.5em;
+    background-color: rgb(228, 228, 228);
+  }
+
+.first-name{
+ width: 40%;
+ float: left;
+}
+
+.last-name{
+    float: left;
+    width: 50%;
+   }
+
+   .label {
+       
+    text-align: center;
+    font-weight: bold;
+    width: 100px;
+    color: #303030;
+    font-family: "Roboto", Arial, Helvetica, sans-serif;
+  }
