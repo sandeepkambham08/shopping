@@ -4,7 +4,7 @@ import React, {Component} from 'react';
 import menu from './media/menu.png';
 import cart from './media/cart1.jpg';
 import './App.css';
-import StarRatings from 'react-star-ratings';
+// import StarRatings from 'react-star-ratings';
 
 import _ from 'lodash';
 
@@ -20,7 +20,7 @@ class App extends Component {
 
   state = {
     leftMenuOpen: false,
-    cartMenuOpen:true,
+    cartMenuOpen:false,
     selectedCategory:'fruit',
   }
   
@@ -64,12 +64,13 @@ class App extends Component {
   render(){
     let totalCartItems = 0 ; 
         // totalCartItems = Object.keys(this.props.cart).length; 
-    {Object.keys(this.props.cart).map(cartItem=>{
+    (Object.keys(this.props.cart).map(cartItem=>{
           // console.log(this.state.cart[cartItem]);
           if(this.props.cart[cartItem].quantity){
               totalCartItems = totalCartItems+1;
           }
-    })}
+    return null;
+    }))
     return (
       <div className="App">
        <header className="App-header">

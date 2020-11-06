@@ -2,10 +2,12 @@
 .App {
   /* color: antiquewhite; */
   text-align: center;
+  /* outline: none !important; */
 }
 
 html *
 {
+  outline: none !important;
    font-family: 'Syne', sans-serif !important ;
    overscroll-behavior-y: none;
 }

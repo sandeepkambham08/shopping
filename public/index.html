@@ -3,6 +3,8 @@
 
 <head>
   <meta charset="utf-8" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="theme-color" content="#000000" />
@@ -23,14 +25,24 @@
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
   <title>React App</title>
-    <!-- Paypal support  -->
-  <script src="https://www.paypal.com/sdk/js?client-id=AVvpASNL3XiGyT6LXo_YFTH6sa4Dg4Tju2l1XnI0nVdJI_5c64K7-5FCBCrU4jcUtq07Ve5exTmv5ufi&currency=CAD"></script> 
+  <!-- Paypal support  -->
+  <script
+    src="https://www.paypal.com/sdk/js?client-id=AVvpASNL3XiGyT6LXo_YFTH6sa4Dg4Tju2l1XnI0nVdJI_5c64K7-5FCBCrU4jcUtq07Ve5exTmv5ufi&currency=CAD"></script>
 
   <!-- To autocomplete the address  -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAmhB1SpIez8-_JN8oYNSdG_mFyCecKFZw&libraries=places"type="text/javascript"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAmhB1SpIez8-_JN8oYNSdG_mFyCecKFZw&libraries=places"
+    type="text/javascript"></script>
   <!-- To autocomplete the address  -->
 
+  <!-- To connect emailJS - send EMAILS  -->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/emailjs-com@2/dist/email.min.js">
+  </script>
+  <script type="text/javascript">
+    (function() {
+    emailjs.init("user_zYvcx8ahyv9WeuNCKteNZ");
+    })();
+  </script>
 </head>
 
 <body>
@@ -46,7 +58,7 @@
 
   <!-- Initialize Firebase -->
   <script src="/__/firebase/init.js"></script>
-  
+
 </body>
 
 </html>

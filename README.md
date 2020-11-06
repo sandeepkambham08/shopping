@@ -5,6 +5,10 @@ Shopping website
   - Add/remove item to the cart
   - Make quantity adjustments from the cart 
   - See item avg review
+  - Checkout
+  - Fill the details in the form
+  - Proceed to pay using Paypal/Debit/Credit
+  - Receive a email confirmation after order placing
 
 ![Alt text](./src/media/shopping_cart_screenshot.png?raw=true "shopping_cart_screenshot")
 
@@ -17,6 +21,10 @@ Shopping website
   - How to add backdrop to close the menu and cart tabs automatically
   - How to work with methods like map 
   - How to work with event listeners like scroll, onclick
+  - How to work with forms and form validation 
+  - How to integrate payment method into a website
+  - How to send an email confirmation 
+  
 ## Libraries used 
   - [Redux](https://redux.js.org/)
   - [React](https://github.com/facebook/react)

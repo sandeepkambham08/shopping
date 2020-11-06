@@ -21,8 +21,8 @@ class Items extends Component {
     }
 
     render() {
-        let totalCartItems=0;
-        let totalPrice = 0;
+        // let totalCartItems=0;
+        // let totalPrice = 0;
         // { Object.keys(this.props.cart).map(cartItem => {
         //         // console.log(this.state.cart[cartItem]);
         //         if (this.props.cart[cartItem].quantity) {

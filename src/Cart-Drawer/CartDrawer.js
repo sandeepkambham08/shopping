@@ -4,19 +4,22 @@ import './CartDrawer.css';
 import Backdrop from '../Backdrop/Backdrop.js';
 
 import { connect } from 'react-redux';      // To access the store
-import { render } from '@testing-library/react';
+// import { render } from '@testing-library/react';
 import PayPal from '../PayPal/PayPal.js';
 import AddressForm  from '../AddressForm/AddressForm.js';
-import PersonalDetails from '../PersonalDetails/PersonalDetails.js'
+import OrderCompleted from '../OrderCompleted/OrderCompleted.js'
+// import PersonalDetails from '../PersonalDetails/PersonalDetails.js'
 
 class Cart extends Component {
 
     state={
-        checkoutOpen:true,
+        checkoutOpen:false,
     }
 
-    OpenCheckout=()=>{
+    OpenCheckout=(totalPrice)=>{
         this.setState({checkoutOpen:true})
+        let total = Math.round(totalPrice*100)/100
+        this.props.fixTotalValue(total);
     }
     closeCheckout=()=>{
         this.setState({checkoutOpen:false})
@@ -34,9 +37,9 @@ class Cart extends Component {
         let totalPrice = 0;
         return (
             <div>
-                {/* <Backdrop
+                <Backdrop
                     isopen={this.props.isMenuOpen}
-                    backdropClicked={this.props.backdropClicked} /> */}
+                    backdropClicked={this.props.backdropClicked} />
                 <div className={Right_Drawer.join(' ')} >
                     {/* <p>Inside Right Drawer</p> */}
                     <div className='split-left'>
@@ -74,7 +77,7 @@ class Cart extends Component {
                         {totalCartItems && <div>
                             {/* <p>---------------------------</p> */}
                             {/* <p>Total items in cart : {totalCartItems}</p> */}
-                            <p className='Checkout-button' onClick={()=>{this.OpenCheckout()}} style={{ textAlign: 'center', width: '50%', margin: 'auto' }} >Checkout: ${Math.round(totalPrice * 100) / 100}</p>
+                        {!this.props.orderCompleted &&    <p className='Checkout-button' onClick={()=>{this.OpenCheckout(totalPrice)}} style={{ textAlign: 'center', width: '50%', margin: 'auto' }} >Checkout: ${Math.round(totalPrice * 100) / 100}</p> }
                             
                         </div>}
                         {!totalCartItems && <p> Cart is empty,s start shopping ! </p>}
@@ -83,10 +86,13 @@ class Cart extends Component {
                     <div className='split-right'>
                         
                         <button className='closeCheckoout-button' onClick={()=>{this.closeCheckout()}}>Back</button>
-                        <PersonalDetails/>
-                        <AddressForm/>
-                        <PayPal
-                        total={totalPrice} />
+                        {/* <PersonalDetails/> */}
+                        {!this.props.orderCompleted 
+                        && <AddressForm/>}
+                        {this.props.orderCompleted 
+                        && <OrderCompleted/>}
+                        {/* <PayPal
+                        total={Math.round(totalPrice * 100)/100} /> */}
                     </div>
                     <p>{this.props.isMenuOpen}</p>
                 </div>
@@ -98,6 +104,7 @@ class Cart extends Component {
 const mapStateToProps = state => {
     return {
         cart: state.cart,
+        orderCompleted:state.orderCompleted,
     };
 };
 
@@ -110,6 +117,10 @@ const mapDispatchToProps = dispatch => {
         decreaseItemQuantity: (item) => {
             console.log('Item count should be increased', item);
             dispatch({ type: 'ITEM_DECREASE', item: item });
+        },
+        fixTotalValue: (total) =>{
+            console.log('Fixing the total value now');
+            dispatch({ type: 'FIX_TOTAL', value: total });
         }
     };
 };

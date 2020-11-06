@@ -1,57 +1,77 @@
-import React,{useState, useEffect, useRef} from 'react';
+import React,{Component} from 'react';
+import {connect} from 'react-redux';
 
-const PayPal = (props) => {
-  const [paid, setPaid] = React.useState(false);
-  const [error, setError] = React.useState(null);
-  const paypalRef = React.useRef();
+// import {useState, useEffect, useRef} from 'react';
+class PayPal extends Component {
+constructor(props){
+  super(props);
+  this.paypalRef = React.createRef();
+}
+  state={
+    paid:false,
+    error:'',
+  }
 
-  // To show PayPal buttons once the component loads
-  React.useEffect(() => {
-    window.paypal
+render(){
+return(
+    <div>
+        <br></br>
+        <h4 className='pricePaypal'>Total Amount is : ${this.props.orderTotal} </h4>
+        <br></br>
+        <div ref={this.paypalRef} />
+    </div>
+)
+}
+componentDidMount(){
+  window.paypal
       .Buttons({
         createOrder: (data, actions) => {
+          console.log(this.props.orderTotal);
+          let total = this.props.orderTotal;
+          let purchase_units = [
+            {
+              description: "Shopping site Order",
+              amount: {
+                currency_code: "CAD",
+                value: total,
+              },
+            },
+          ];
           return actions.order.create({
             intent: "CAPTURE",
-            purchase_units: [
-              {
-                description: "Your description",
-                amount: {
-                  currency_code: "CAD",
-                  value: 1,
-                },
-              },
-            ],
+            purchase_units: purchase_units,
           });
         },
         onApprove: async (data, actions) => {
           const order = await actions.order.capture();
-          setPaid(true);
+          this.setState({paid:true})
+          this.props.orderCompleted();
           console.log(order);
         },
         onError: (err) => {
-        //   setError(err),
+          // setError(err),
           console.error(err);
         },
       })
-      .render(paypalRef.current);
-  }, []);
-
-  // If the payment has been made
-  if (paid) {
-    return <div>Payment successful.!</div>;
-  }
-
-  // If any error occurs
-  if (error) {
-    return <div>Error Occurred in processing payment.! Please try again.</div>;
-  }
-
-return(
-    <div>
-        <h4>Total Amount is : ${props.total} </h4>
-        <div ref={paypalRef} />
-    </div>
-)
+      .render(this.paypalRef.current);
 }
 
-export default PayPal; 
+}
+
+const mapStateToProps=state=>{
+  return{
+    orderTotal:state.orderTotal,
+  }
+}
+
+const mapDispatchToProps = dispatch =>{
+  return{
+    orderCompleted:()=>{
+      console.log('Order is now completed');
+      dispatch({ type: 'ORDER_COMPLETED', value: true });
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(PayPal); 
+

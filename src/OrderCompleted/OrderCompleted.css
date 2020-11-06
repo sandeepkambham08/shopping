@@ -1,0 +1,11 @@
+.payment-made{
+    margin: 5vh;
+    border-radius: 2em;
+    background-color: antiquewhite;
+    padding:5vh ;
+    box-shadow:2px 5px 5px 5px rgb(189, 186, 186);
+}
+
+.payment-made p{
+    padding:1vh ;
+}

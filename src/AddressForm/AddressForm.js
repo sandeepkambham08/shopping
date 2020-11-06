@@ -1,9 +1,14 @@
-import React from 'react';
+import React, { Component }  from 'react';
 import $ from 'jquery';
-import './AddressForm.css';
+import axios from 'axios';
+import emailjs from 'emailjs-com';
+import Form from 'react-bootstrap/Form'
+import PayPal from '../PayPal/PayPal.js';
+import { connect } from 'react-redux';      // To access the store
 
-const AddressForm=()=>{
-    var searchLocation = 'search_location';
+import './AddressForm.css';
+// import { render } from '@testing-library/react';
+var searchLocation = 'search_location';
     const google = window.google;
     const componentForm = {
         street_number: "short_name",
@@ -14,95 +19,231 @@ const AddressForm=()=>{
         country: "long_name",
         postal_code: "short_name",
     };
-      
-
     $(document).ready(function(){
-        var autocomplete;
-        autocomplete = new google.maps.places.Autocomplete((document.getElementById(searchLocation)), {
-        types: ['geocode'],
-        componentRestrictions:{'country':['CA','USA']},
-        // fields:['place_id','geometry']
-    });
-    autocomplete.setFields(["address_component"])
-    google.maps.event.addListener(autocomplete,'place_changed',  function(){
-        var place = autocomplete.getPlace();
-        console.log(place);
-        for (const component in componentForm) {
-            document.getElementById(component).value = "";
-            document.getElementById(component).disabled = false;
+      var autocomplete;
+      autocomplete = new google.maps.places.Autocomplete((document.getElementById(searchLocation)), {
+      types: ['geocode'],
+      componentRestrictions:{'country':['CA','USA']},
+      // fields:['place_id','geometry']
+  });
+  autocomplete.setFields(["address_component"])
+  google.maps.event.addListener(autocomplete,'place_changed',  function(){
+      var place = autocomplete.getPlace();
+      console.log(place);
+      for (const component in componentForm) {
+          document.getElementById(component).value = "";
+          document.getElementById(component).disabled = false;
+        }
+      
+        // Get each component of the address from the place details,
+        // and then fill-in the corresponding field on the form.
+        for (const component of place.address_components) {
+          const addressType = component.types[0];
+      
+          if (componentForm[addressType]) {
+            const val = component[componentForm[addressType]];
+            document.getElementById(addressType).value = val;
           }
-        
-          // Get each component of the address from the place details,
-          // and then fill-in the corresponding field on the form.
-          for (const component of place.address_components) {
-            const addressType = component.types[0];
-        
-            if (componentForm[addressType]) {
-              const val = component[componentForm[addressType]];
-              document.getElementById(addressType).value = val;
-            }
-          }        
-    })
-    })
+        }        
+  })
+  })
+
+class AddressForm extends Component {
+
+  state={
+    firstName:'',
+    lastName:'',
+    phoneNumber:'',
+    email:'',
+    streetAddress:'',
+    city:'',
+    state:'',
+    zipCode:'',
+    country:'',
+    errormessage:'',
+    validCheckout:'false',
+  }
+
+  sendEmail =(e)=> {
+    e.preventDefault();
+
+    emailjs.sendForm('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', e.target, 'YOUR_USER_ID')
+      .then((result) => {
+          console.log(result.text);
+      }, (error) => {
+          console.log(error.text);
+      });
+  }
+
+  submitForm =(event)=>{
+    event.preventDefault();
+    console.log(this.props.cart)
+    console.log('Clicked on submit');
+    let err = '';
+    let streetAddress = 0;
+    let firstName = document.getElementById('first-name').value;
+    let lastName = document.getElementById('last-name').value;
+    let phoneNumber = document.getElementById('phone').value;
+    let email = document.getElementById('email').value;
+    if(document.getElementById('apt_number').value){
+      streetAddress = document.getElementById('street_number').value +', ' + document.getElementById('apt_number').value + ', ' + document.getElementById('route').value;
+    }else{
+      streetAddress = document.getElementById('street_number').value + ', ' + document.getElementById('route').value;
+    }
+    let city = document.getElementById('locality').value;
+    let state = document.getElementById('administrative_area_level_1').value;
+    let zipCode = document.getElementById('postal_code').value;
+    let country = document.getElementById('country').value;
+    if(!firstName || !lastName || !phoneNumber || !email || !streetAddress || !city || !state || !zipCode || !country){
+      err = "* Please fill all the input fields";
+    }
+    if(firstName && lastName && phoneNumber && email && streetAddress && city && state && zipCode && country){
+      // event.preventDefault();
+      // alert('Please fill all the input fields');
+      this.setState({
+        firstName:firstName,
+        lastName:lastName,
+        phoneNumber:phoneNumber,
+        email:email,
+        streetAddress:streetAddress,
+        city:city,
+        state:state,
+        zipCode:zipCode,
+        country:country,
+      },()=>{
+        console.log( this.state)
+        this.setState({validCheckout:true});
+      })
+      err = "You can now proceed";
+    }
+
+    this.setState({errormessage:err})
+    console.log(document.getElementById('email').value);
+    console.log(document.getElementById('email').value);
+    // console.log(firstName,lastName,phoneNumber,email,streetAddress,city,state,zipCode,country)
+    console.log(streetAddress);
+  }
+
+  hadleInput = (event) =>{
+    console.log(event.target.id)
+    console.log(event.target.value)
+  }
+  
     
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+  
+
+render(){
+  if(this.props.orderCompleted){
+    let templateParams = {
+      to: this.state.email,
+      subject: 'Order confirmation - from Shopping site',
+      html:
+      `<h3>Hello ${this.state.firstName} ${this.state.lastName},</h3>
+      <h1>Thanks for your order</h1>`
+    }
+    emailjs.send('service_35uvf3l', 'template_g1v1dbp', templateParams, "user_zYvcx8ahyv9WeuNCKteNZ")
+      .then(function (response) {
+      console.log('SUCCESS!', response.status, response.text);
+      }, function (error) {
+      console.log('FAILED...', error);
+      });
+  }
 return (
+  <div>
     <div className='Address-form'>
-        <form>
-        {/* <label>
-        Enter your name:
-        <input type='text' placeholder="Enter your name" name='Enter your name'/>
-        </label> */}
-        <label>
-        Enter your address:
-        <input id='search_location' className='search_location'  type='text' placeholder='Type address'/>
-        </label>  
+        <form >
+        <br></br>
         <table id="address">
-            
+        <tbody>
       <tr>
-        <td class="label">Street address</td>
-        <td class="slimField">
-          <input class="field" id="street_number" placeholder='street no' disabled="false" />
+        <td className="label">Name </td>
+        <td className="mediumField">
+          <input className="Street-field" id="first-name" name="first-name" placeholder='First name'  required onChange={(event)=>this.hadleInput(event)}/>
         </td>
-        <td class="slimField">
-          <input class="field" id="apt_number"  placeholder='apt/unit' disabled="false" />
-        </td>
-        <td class="wideField" colspan="2">
-          <input class="field" id="route" placeholder='street name' disabled="true" />
+        <td className="wideField" colSpan="2">
+          <input className="Street-field" id="last-name" placeholder='Last name'  required onChange={(event)=>this.hadleInput(event)}/>
         </td>
       </tr>
       <tr>
-        <td class="label">City</td>
-        <td class="wideField" colspan="3">
-          <input class="field" id="locality" disabled="false" />
+        <td className="label">Phone</td>
+        <td className="slimField">
+          <input className="Street-field" id="phone" required onChange={(event)=>this.hadleInput(event)} />
+        </td>
+        <td className="label">Email</td>
+        <td className="mediumField">
+          <input className="field" placeholder='name@example.com' id="email" required onChange={(event)=>this.hadleInput(event)}/>
+        </td>
+      </tr>
+      
+      </tbody>
+    </table>
+        <div className='search-box'>
+        <label>
+        {/* <span >Address:</span> */}
+        <input id='search_location' className='search_location'  type='text' placeholder='Address' required onChange={(event)=>this.hadleInput(event)}/>
+        </label>  
+        </div>
+        <table id="address">
+        <tbody>
+      <tr>
+        <td className="label">Street address</td>
+        <td className="slimField">
+          <input className="Street-field" id="street_number" placeholder='street no' disabled={true} required onChange={(event)=>this.hadleInput(event)}/>
+        </td>
+        <td className="slimField">
+          <input className="Street-field" id="apt_number"  placeholder='apt/unit' disabled={true} />
+        </td>
+        <td className="wideField" colSpan="2">
+          <input className="Street-field" id="route" placeholder='street name' disabled={true} required onChange={(event)=>this.hadleInput(event)}/>
         </td>
       </tr>
       <tr>
-        <td class="label">State</td>
-        <td class="slimField">
+        <td className="label">City</td>
+        <td className="wideField" colSpan="3">
+          <input className="field" id="locality" disabled={true} required onChange={(event)=>this.hadleInput(event)}/>
+        </td>
+      </tr>
+      <tr>
+        <td className="label">State</td>
+        <td className="slimField">
           <input
-            class="field"
+            className="field"
             id="administrative_area_level_1"
-            disabled="true"
+            disabled={true}
+            required onChange={(event)=>this.hadleInput(event)}
           />
         </td>
-        <td class="label">Zip code</td>
-        <td class="wideField">
-          <input class="field" id="postal_code" disabled="true" />
+        <td className="label">Zip code</td>
+        <td className="wideField">
+          <input className="field" id="postal_code" disabled={true} required onChange={(event)=>this.hadleInput(event)}/>
         </td>
       </tr>
       <tr>
-        <td class="label">Country</td>
-        <td class="wideField" colspan="3">
-          <input class="field" id="country" disabled="true" />
+        <td className="label">Country</td>
+        <td className="wideField" colSpan="3">
+          <input className="field" id="country" disabled={true} required onChange={(event)=>this.hadleInput(event)}/>
         </td>
       </tr>
+      </tbody>
     </table>
-      
-        
+    {/* <input className='submit-button' type='submit' onClick={(event)=>this.submitForm(event)}/> */}
+    <div className="Error-message">{this.state.errormessage}</div>
+    <button  className='submit-button' onClick={(event)=>this.submitForm(event)} >Save</button>
         </form>
-        
+    </div>
+    <PayPal
+    total={this.state.phoneNumber} />
     </div>
 )
 }
+}
 
-export default AddressForm;
+const mapStateToProps = state => {
+  return {
+      cart: state.cart,
+      orderCompleted:state.orderCompleted,
+  };
+};
+
+export default connect(mapStateToProps)(AddressForm);
