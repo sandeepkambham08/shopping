@@ -134,21 +134,21 @@ class AddressForm extends Component {
   
 
 render(){
-  if(this.props.orderCompleted){
-    let templateParams = {
-      to: this.state.email,
-      subject: 'Order confirmation - from Shopping site',
-      html:
-      `<h3>Hello ${this.state.firstName} ${this.state.lastName},</h3>
-      <h1>Thanks for your order</h1>`
-    }
-    emailjs.send('service_35uvf3l', 'template_g1v1dbp', templateParams, "user_zYvcx8ahyv9WeuNCKteNZ")
-      .then(function (response) {
-      console.log('SUCCESS!', response.status, response.text);
-      }, function (error) {
-      console.log('FAILED...', error);
-      });
-  }
+  // if(this.props.orderCompleted){
+  //   let templateParams = {
+  //     to: this.state.email,
+  //     subject: 'Order confirmation - from Shopping site',
+  //     html:
+  //     `<h3>Hello ${this.state.firstName} ${this.state.lastName},</h3>
+  //     <h1>Thanks for your order</h1>`
+  //   }
+  //   emailjs.send('service_35uvf3l', 'template_g1v1dbp', templateParams, "user_zYvcx8ahyv9WeuNCKteNZ")
+  //     .then(function (response) {
+  //     console.log('SUCCESS!', response.status, response.text);
+  //     }, function (error) {
+  //     console.log('FAILED...', error);
+  //     });
+  // }
 return (
   <div>
     <div className='Address-form'>
@@ -233,7 +233,11 @@ return (
         </form>
     </div>
     <PayPal
-    total={this.state.phoneNumber} />
+    total={this.state.phoneNumber} 
+    email={this.state.email}
+    firstName={this.state.firstName}
+    lastName={this.state.lastName}
+    />
     </div>
 )
 }

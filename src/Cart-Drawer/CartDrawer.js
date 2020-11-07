@@ -85,7 +85,7 @@ class Cart extends Component {
                     </div>
                     <div className='split-right'>
                         
-                        <button className='closeCheckoout-button' onClick={()=>{this.closeCheckout()}}>Back</button>
+                        <button className='closeCheckoout-button' onClick={()=>{this.closeCheckout()}}> &lt; Back</button>
                         {/* <PersonalDetails/> */}
                         {!this.props.orderCompleted 
                         && <AddressForm/>}

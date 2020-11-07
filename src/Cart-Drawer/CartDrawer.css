@@ -91,15 +91,15 @@ min-height: 5%;
 
 .closeCheckoout-button{
     border: 1px solid rgb(112, 110, 110);
-    background-color: rgb(2, 0, 0);
-    padding:0.5em;
-    position: absolute;
+    background-color: rgb(43, 42, 42);
+    padding:0.5em 4em;
+    position: relative;
     margin-top: 2vh;
     border-radius: 1em;
     font-size: 1.2em;
     color: white;
     font-weight: 700;
-    margin-left: 30vw;
+    margin-left: 0vw;
     cursor: pointer;
     
 }

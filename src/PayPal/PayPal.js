@@ -1,5 +1,6 @@
 import React,{Component} from 'react';
 import {connect} from 'react-redux';
+import emailjs from 'emailjs-com';
 
 // import {useState, useEffect, useRef} from 'react';
 class PayPal extends Component {
@@ -47,6 +48,20 @@ componentDidMount(){
           this.setState({paid:true})
           this.props.orderCompleted();
           console.log(order);
+          let templateParams = {
+            to: this.props.email,
+            subject: 'Order confirmation - from Shopping site',
+            html:
+            `<h3>Hello ${this.props.firstName} ${this.props.lastName},</h3>
+            <h1>Thanks for your order</h1>`
+          }
+          emailjs.send('service_35uvf3l', 'template_g1v1dbp', templateParams, "user_zYvcx8ahyv9WeuNCKteNZ")
+            .then(function (response) {
+            console.log('SUCCESS!', response.status, response.text);
+            }, function (error) {
+            console.log('FAILED...', error);
+            });
+
         },
         onError: (err) => {
           // setError(err),
