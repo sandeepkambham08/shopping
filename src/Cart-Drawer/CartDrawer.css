@@ -30,6 +30,7 @@
 .Cart-item{
     width: 90%;
     overflow: hidden;
+    height: 16vh;
     /* border: 1px solid rgb(252, 252, 252); */
     background-color: rgba(255, 248, 220, 0.829);
     border-radius: 2em;
@@ -40,8 +41,8 @@
 
 .Cart-item-image{
     /* overflow: hidden; */
-    max-height: 13vh; 
-    min-height: 13vh;
+    max-height: 16vh; 
+    min-height: 16vh;
     width: 40%;
     /* margin-left: 5%; */
     float: left;
@@ -63,18 +64,19 @@ min-height: 5%;
 .Checkout-button{
     font-family: Arial, Helvetica, sans-serif !important;
     font-weight: bolder;
-    font-size: .8em;
+    font-size: 1em;
     color: rgb(255, 255, 255);
     border-radius: 1em;
-    padding:0.3em 0.6em;
-    background-color: rgb(82, 161, 3);
+    padding:0.6em 0.6em;
+    background-color: rgb(189, 160, 0);
     cursor: pointer;
     box-shadow:2px 5px 5px 4px rgb(226, 226, 226);
-    transition: box-shadow 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: box-shadow 0.3s ease-in-out, background-color 0.3s ease-in-out;
 }
 
 .Checkout-button:hover{
-    box-shadow:2px 3px 5px 4px rgb(131, 129, 129);
+    background-color: rgb(204, 174, 3);
+    box-shadow:2px 3px 6px 3px rgb(102, 87, 1);
 }
 
 .split-left{
@@ -84,26 +86,29 @@ min-height: 5%;
 }
 
 .split-right{
-    width: 35%;
+    width: 30%;
     float: left;
     margin-right: 5%;
 }
 
 .closeCheckoout-button{
-    border: 1px solid rgb(112, 110, 110);
-    background-color: rgb(43, 42, 42);
-    padding:0.5em 4em;
-    position: relative;
-    margin-top: 2vh;
+    border: 1px solid rgb(175, 174, 174);
+    background-color: rgba(143, 143, 143, 0.432);
+    padding:0.5em 2em;
+    position: absolute;
+    float:left ;
+    margin-top: 3vh;
     border-radius: 1em;
     font-size: 1.2em;
     color: white;
     font-weight: 700;
-    margin-left: 0vw;
+    margin-left: 16vw;
     cursor: pointer;
+    transition: box-shadow 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     
 }
 .closeCheckoout-button:hover{
     box-shadow:2px 3px 6px 3px rgb(131, 129, 129);
+    background-color: rgba(179, 4, 4, 0.678);
 }
 

@@ -67,6 +67,7 @@ class Items extends Component {
 
                         )
                     }
+                    return null
 
                 })}
                 {/* <div>

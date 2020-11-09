@@ -16,9 +16,9 @@ constructor(props){
 render(){
 return(
     <div>
-        <br></br>
+        {/* <br></br>
         <h4 className='pricePaypal'>Total Amount is : ${this.props.orderTotal} </h4>
-        <br></br>
+        <br></br> */}
         <div ref={this.paypalRef} />
     </div>
 )

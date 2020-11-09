@@ -1,8 +1,8 @@
 import React, { Component }  from 'react';
 import $ from 'jquery';
-import axios from 'axios';
+// import axios from 'axios';
 import emailjs from 'emailjs-com';
-import Form from 'react-bootstrap/Form'
+// import Form from 'react-bootstrap/Form'
 import PayPal from '../PayPal/PayPal.js';
 import { connect } from 'react-redux';      // To access the store
 
@@ -61,7 +61,7 @@ class AddressForm extends Component {
     zipCode:'',
     country:'',
     errormessage:'',
-    validCheckout:'false',
+    validCheckout:false,
   }
 
   sendEmail =(e)=> {
@@ -113,6 +113,13 @@ class AddressForm extends Component {
       },()=>{
         console.log( this.state)
         this.setState({validCheckout:true});
+        // var form = document.getElementById("Address-form");
+        // console.log(form);
+        // var elements = form.elements;
+        // for (var i = 0, len = elements.length; i < len; ++i) {
+        //  elements[i].readOnly = true;
+        // }
+        $("#Address-form input").prop("disabled", true);
       })
       err = "You can now proceed";
     }
@@ -122,6 +129,13 @@ class AddressForm extends Component {
     console.log(document.getElementById('email').value);
     // console.log(firstName,lastName,phoneNumber,email,streetAddress,city,state,zipCode,country)
     console.log(streetAddress);
+  }
+
+  editForm = () =>{
+    $("#Address-form input").removeAttr("disabled");
+    this.setState({validCheckout:false});
+    let err='';
+    this.setState({errormessage:err})
   }
 
   hadleInput = (event) =>{
@@ -151,8 +165,8 @@ render(){
   // }
 return (
   <div>
-    <div className='Address-form'>
-        <form >
+    <div className='Address-form' >
+        <form id='Address-form'>
         <br></br>
         <table id="address">
         <tbody>
@@ -229,15 +243,21 @@ return (
     </table>
     {/* <input className='submit-button' type='submit' onClick={(event)=>this.submitForm(event)}/> */}
     <div className="Error-message">{this.state.errormessage}</div>
-    <button  className='submit-button' onClick={(event)=>this.submitForm(event)} >Save</button>
-        </form>
+    {!this.state.validCheckout && <button  className='submit-button' onClick={(event)=>this.submitForm(event)} >Save</button>}
+    {this.state.validCheckout && <button  className='submit-button' onClick={()=>this.editForm()} >Edit</button>}
+
+    </form> 
     </div>
+    <br></br>
+    <h4 className='pricePaypal'>Total Amount is : ${this.props.orderTotal} </h4>
+    <br></br>
+    {this.state.validCheckout && 
     <PayPal
     total={this.state.phoneNumber} 
     email={this.state.email}
     firstName={this.state.firstName}
     lastName={this.state.lastName}
-    />
+    />}
     </div>
 )
 }
@@ -247,6 +267,7 @@ const mapStateToProps = state => {
   return {
       cart: state.cart,
       orderCompleted:state.orderCompleted,
+      orderTotal:state.orderTotal,
   };
 };
 

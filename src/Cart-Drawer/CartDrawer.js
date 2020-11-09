@@ -5,7 +5,7 @@ import Backdrop from '../Backdrop/Backdrop.js';
 
 import { connect } from 'react-redux';      // To access the store
 // import { render } from '@testing-library/react';
-import PayPal from '../PayPal/PayPal.js';
+// import PayPal from '../PayPal/PayPal.js';
 import AddressForm  from '../AddressForm/AddressForm.js';
 import OrderCompleted from '../OrderCompleted/OrderCompleted.js'
 // import PersonalDetails from '../PersonalDetails/PersonalDetails.js'
@@ -56,10 +56,10 @@ class Cart extends Component {
                                             <div className='Cart-item-details'>
                                                 <p>{this.props.cart[cartItem].title}</p>
                                                 <p> ${this.props.cart[cartItem].price}</p>
-                                                <button className='Decrement-button' hidden={this.props.cart[cartItem].quantity <= 0} onClick={() => this.props.decreaseItemQuantity(this.props.cart[cartItem])}>-</button>
+                                                <button className='Decrement-button' hidden={this.props.cart[cartItem].quantity <= 0} disabled={this.state.checkoutOpen} onClick={() => this.props.decreaseItemQuantity(this.props.cart[cartItem])}>-</button>
                                                 <span hidden={this.props.cart[cartItem].quantity <= 0} style={{ marginRight: '1em' }} >{this.props.cart[cartItem].quantity}</span>
                                                 {/* <button className='Increment-button' onClick={()=>this.increaseQuantity(item)}>+</button> */}
-                                                <button className='Increment-button' onClick={() => this.props.increaseItemQuantity(this.props.cart[cartItem])}>+</button>
+                                                <button className='Increment-button'  disabled={this.state.checkoutOpen}   onClick={() => this.props.increaseItemQuantity(this.props.cart[cartItem])}>+</button>
                                                 <p className='price' style={{ textAlign: 'center', margin: '10px 10px' }} > ${Math.round(this.props.cart[cartItem].quantity * this.props.cart[cartItem].price * 100) / 100}</p>
                                             </div>
                                         </div>
@@ -72,20 +72,23 @@ class Cart extends Component {
                                     )
 
                             }
+                            return null
+                            
                         })}
 
                         {totalCartItems && <div>
                             {/* <p>---------------------------</p> */}
                             {/* <p>Total items in cart : {totalCartItems}</p> */}
-                        {!this.props.orderCompleted &&    <p className='Checkout-button' onClick={()=>{this.OpenCheckout(totalPrice)}} style={{ textAlign: 'center', width: '50%', margin: 'auto' }} >Checkout: ${Math.round(totalPrice * 100) / 100}</p> }
-                            
+                            <br></br>
+                        {!this.props.orderCompleted && !this.state.checkoutOpen &&  <p className='Checkout-button' onClick={()=>{this.OpenCheckout(totalPrice)}} style={{ textAlign: 'center', width: '50%', margin: 'auto' }} >Checkout: ${Math.round(totalPrice * 100) / 100}</p> }
+                        <br></br>
                         </div>}
                         {!totalCartItems && <p> Cart is empty,s start shopping ! </p>}
 
                     </div>
                     <div className='split-right'>
                         
-                        <button className='closeCheckoout-button' onClick={()=>{this.closeCheckout()}}> &lt; Back</button>
+                        <button className='closeCheckoout-button' title="Cancel checkout" onClick={()=>{this.closeCheckout()}}> X </button>
                         {/* <PersonalDetails/> */}
                         {!this.props.orderCompleted 
                         && <AddressForm/>}
