@@ -10,7 +10,10 @@ Shopping website
   - Proceed to pay using Paypal/Debit/Credit
   - Receive a email confirmation after order placing
 
-![Alt text](./src/media/shopping_cart_screenshot.png?raw=true "shopping_cart_screenshot")
+<!-- ![Alt text](./src/media/shopping_cart_screenshot.png?raw=true "shopping_cart_screenshot") -->
+![Alt text](./src/media/Shopping-site-1.gif "shopping_cart_gif1")
+![Alt text](./src/media/Shopping-site-2.gif "shopping_cart_gif2")
+![Alt text](./src/media/Shopping-site-3.gif "shopping_cart_gif3")
 
 ## Experiences gained by developing this project 
   - How to use redux as a global state for the app.
