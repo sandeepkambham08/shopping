@@ -1,14 +1,14 @@
 import React, {Component} from 'react';
 // import logo from './logo.svg';
 // import background from './media/backgroundImage.jpg';
-import menu from './media/menu.png';
+// import menu from './media/menu.png';
 import cart from './media/cart1.jpg';
 import './App.css';
 // import StarRatings from 'react-star-ratings';
 
 import _ from 'lodash';
 
-import Leftdrawer from './Left-drawer/LeftDrawer';
+// import Leftdrawer from './Left-drawer/LeftDrawer';
 import CartDrawer from './Cart-Drawer/CartDrawer';
 import Categories from './Categories/Categories'
 
@@ -74,7 +74,8 @@ class App extends Component {
     return (
       <div className="App">
        <header className="App-header">
-            <img src={menu} onClick={()=>this.LeftdrawerOpen()} className='Menu-button' alt="menu-button"/>
+            {/* <img src={menu} onClick={()=>this.LeftdrawerOpen()} className='Menu-button' alt="menu-button"/> */}
+            <div></div>
             <p> The <span style={{fontWeight:"bolder", fontStyle:'italic',  textShadow:'3px 3px 7px #0f0f0f'}}>Shopping</span> store you love </p>
             <div onClick={()=>this.cartDrawerOpen()} >
             <span className='Items-Count'>{totalCartItems}</span>
@@ -84,10 +85,10 @@ class App extends Component {
         <div className='App-body'>
         {window.addEventListener('scroll', this.checkHeader)}
           {/* <p>testing</p> */}
-          <Leftdrawer
+          {/* <Leftdrawer
           isMenuOpen = {this.state.leftMenuOpen}
           backdropClicked = {this.LeftdrawerOpen}
-          />
+          /> */}
           <CartDrawer
           isMenuOpen = {this.state.cartMenuOpen}
           backdropClicked = {this.cartDrawerOpen}
